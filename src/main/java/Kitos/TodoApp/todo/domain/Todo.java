@@ -4,13 +4,15 @@ import Kitos.TodoApp.global.BaseTimeEntity;
 import Kitos.TodoApp.user.domain.User;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 
-@Entity
+@Builder
 @Getter
 @AllArgsConstructor
+@Entity
 public class Todo extends BaseTimeEntity {
 
     @Id
