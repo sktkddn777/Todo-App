@@ -27,6 +27,7 @@ public class Todo extends BaseTimeEntity {
     @NotNull
     private String content;
 
+    @NotNull
     private boolean isTodo;
 
     @NotNull
