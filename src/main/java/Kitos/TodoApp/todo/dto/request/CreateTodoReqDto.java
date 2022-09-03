@@ -13,8 +13,8 @@ public class CreateTodoReqDto {
   public static Todo toEntity(CreateTodoReqDto dto){
     return Todo.builder()
             .content(dto.getContent())
-            .done(false) // TODO : 컬럼 default 값 vs 코드상 설정
-            .active(false)
+            .isDone(false) // TODO : 컬럼 default 값 vs 코드상 설정
+            .isActive(true)
             .build();
   }
 }

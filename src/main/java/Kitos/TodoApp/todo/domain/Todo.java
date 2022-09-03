@@ -28,10 +28,8 @@ public class Todo extends BaseTimeEntity {
     private String content;
 
     @NotNull
-    @Column(name = "is_done")
-    private boolean done;
+    private boolean isDone;
 
     @NotNull
-    @Column(name = "is_active")
-    private boolean active;
+    private boolean isActive;
 }
