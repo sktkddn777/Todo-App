@@ -2,22 +2,22 @@ package Kitos.TodoApp.todo.domain;
 
 import Kitos.TodoApp.global.BaseTimeEntity;
 import Kitos.TodoApp.user.domain.User;
+
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+
+import lombok.*;
 
 import javax.persistence.*;
 
 @Builder
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Todo extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "todo_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,12 +28,10 @@ public class Todo extends BaseTimeEntity {
     private String content;
 
     @NotNull
-    private boolean isTodo;
+    @Column(name = "is_done")
+    private boolean done;
 
     @NotNull
-    private boolean isActive;
-
-    public Todo(String content) {
-        this.content = content;
-    }
+    @Column(name = "is_active")
+    private boolean active;
 }
