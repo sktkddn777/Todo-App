@@ -22,7 +22,7 @@ public class TodoApiController {
   private final TodoService todoService;
 
   @PostMapping // TODO: 유효성검사, 인가
-  public ResponseEntity<?> createTodo(@RequestBody CreateTodoReqDto dto) {
+  public ResponseEntity<TodoResDto> createTodo(@RequestBody CreateTodoReqDto dto) {
     TodoResDto todo = todoService.createTodo(dto);
 
     // new ResponseEntity(todo, HttpStatus.CREATED)도 가능
