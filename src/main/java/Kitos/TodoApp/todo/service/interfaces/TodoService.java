@@ -14,4 +14,6 @@ public interface TodoService {
   TodoResDto createTodo(CreateTodoReqDto dto);
 
   Optional<Page<Todo>> getAllTodo(Pageable pageable);
+
+  TodoResDto doneTodo(Long id);
 }

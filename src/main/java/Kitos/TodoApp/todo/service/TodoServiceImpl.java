@@ -1,5 +1,6 @@
 package Kitos.TodoApp.todo.service;
 
+import Kitos.TodoApp.global.exception.NotFoundException;
 import Kitos.TodoApp.todo.domain.Todo;
 import Kitos.TodoApp.todo.domain.repository.TodoRepository;
 import Kitos.TodoApp.todo.dto.request.CreateTodoReqDto;
@@ -34,5 +35,13 @@ public class TodoServiceImpl implements TodoService {
   public Optional<Page<Todo>> getAllTodo(Pageable pageable) {
 
     return Optional.of(todoRepository.findAll(pageable));
+  }
+
+  public TodoResDto doneTodo(Long id) {
+    Todo todo = todoRepository.findById(id).orElseThrow(() ->
+      new NotFoundException("not exists todo id : " + id)
+    );
+    todo.doneTodo();
+    return new TodoResDto(todo);
   }
 }
