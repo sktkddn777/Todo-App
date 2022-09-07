@@ -1,6 +1,7 @@
 package Kitos.TodoApp.todo.domain;
 
 import Kitos.TodoApp.global.BaseTimeEntity;
+import Kitos.TodoApp.global.exception.AlreadyDoneTodoException;
 import Kitos.TodoApp.user.domain.User;
 
 import com.sun.istack.NotNull;
@@ -32,4 +33,10 @@ public class Todo extends BaseTimeEntity {
 
     @NotNull
     private boolean isActive;
+
+    public void doneTodo() {
+        if(this.isDone)
+            throw new AlreadyDoneTodoException("todo id " + this.id + "is already done");
+        this.isDone = true;
+    }
 }
