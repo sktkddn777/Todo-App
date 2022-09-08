@@ -38,7 +38,7 @@ public class TodoApiController {
     return todoService.getAllTodo(pageable).orElseThrow();
   }
 
-  @PutMapping
+  @PatchMapping("/{id}")
   public ResponseEntity<TodoResDto> doneTodo(@PathVariable Long id) {
     TodoResDto todo = todoService.doneTodo(id);
     return ResponseEntity.ok().body(todo);
