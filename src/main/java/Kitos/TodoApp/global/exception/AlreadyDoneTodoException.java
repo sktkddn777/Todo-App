@@ -1,7 +1,10 @@
 package Kitos.TodoApp.global.exception;
 
-public class AlreadyDoneTodoException extends RuntimeException {
-    public AlreadyDoneTodoException(String message) {
-        super(message);
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+public class AlreadyDoneTodoException extends ResponseStatusException {
+    public AlreadyDoneTodoException() {
+        super(HttpStatus.CONFLICT, "already done todo.");
     }
 }
