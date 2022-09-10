@@ -36,7 +36,7 @@ public class Todo extends BaseTimeEntity {
 
     public void doneTodo() {
         if(this.isDone)
-            throw new AlreadyDoneTodoException("todo id " + this.id + "is already done");
+            throw new AlreadyDoneTodoException();
         this.isDone = true;
     }
 }
