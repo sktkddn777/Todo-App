@@ -37,6 +37,7 @@ public class TodoServiceImpl implements TodoService {
     return Optional.of(todoRepository.findAll(pageable));
   }
 
+  @Transactional
   public TodoResDto doneTodo(Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(() ->
       new NotFoundException("not exists todo id : " + id)
