@@ -2,11 +2,13 @@ package Kitos.TodoApp.todo.dto.request;
 
 import Kitos.TodoApp.todo.domain.Todo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreateTodoReqDto {
   private String content;
 
