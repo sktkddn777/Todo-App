@@ -35,7 +35,7 @@ public class TodoApiController {
 //            .message("get All done")
 //            .data(Map.of("todos", todoService.getAllTodo(pageable).orElseThrow()))
 //            .build();
-    return todoService.getAllTodo(pageable).orElseThrow();
+    return todoService.getAllTodo(pageable);
   }
 
   @PatchMapping("/{id}")

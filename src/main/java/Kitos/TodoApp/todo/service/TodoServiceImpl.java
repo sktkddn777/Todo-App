@@ -31,9 +31,9 @@ public class TodoServiceImpl implements TodoService {
     return new TodoResDto(newTodo);
   }
 
-  public Optional<Page<Todo>> getAllTodo(Pageable pageable) {
+  public Page<Todo> getAllTodo(Pageable pageable) {
 
-    return Optional.of(todoRepository.findAll(pageable));
+    return Optional.of(todoRepository.findAll(pageable)).orElseThrow();
   }
 
   @Transactional
