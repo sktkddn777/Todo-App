@@ -1,7 +1,7 @@
 package Kitos.TodoApp.todo.domain;
 
 import Kitos.TodoApp.global.BaseTimeEntity;
-import Kitos.TodoApp.global.exception.AlreadyDoneTodoException;
+import Kitos.TodoApp.global.exception.CustomException;
 import Kitos.TodoApp.user.domain.User;
 
 import com.sun.istack.NotNull;
@@ -9,6 +9,8 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+
+import static Kitos.TodoApp.global.exception.ErrorCode.ALREADY_DONE_TODO;
 
 @Builder
 @Getter
@@ -36,7 +38,7 @@ public class Todo extends BaseTimeEntity {
 
     public void doneTodo() {
         if(this.isDone)
-            throw new AlreadyDoneTodoException();
+            throw new CustomException(ALREADY_DONE_TODO);
         this.isDone = true;
     }
 }

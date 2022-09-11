@@ -1,5 +1,7 @@
 package Kitos.TodoApp.todo.service;
 
+import Kitos.TodoApp.global.exception.CustomException;
+import Kitos.TodoApp.global.exception.ErrorCode;
 import Kitos.TodoApp.global.exception.NotFoundException;
 import Kitos.TodoApp.todo.domain.Todo;
 import Kitos.TodoApp.todo.domain.repository.TodoRepository;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
+import static Kitos.TodoApp.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +43,7 @@ public class TodoServiceImpl implements TodoService {
   @Transactional
   public TodoResDto doneTodo(Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(() ->
-      new NotFoundException("does not exist todo.")
+      new CustomException(MEMBER_NOT_FOUND)
     );
     todo.doneTodo();
     return new TodoResDto(todo);
