@@ -38,6 +38,14 @@ public class TodoServiceImpl implements TodoService {
     return Optional.of(todoRepository.findAll(pageable)).orElseThrow();
   }
 
+  @Override
+  public TodoResDto getDetailTodo(Long id) {
+    Todo todo = todoRepository.findById(id).orElseThrow(() ->
+            new CustomException(TODO_NOT_FOUND));
+    return new TodoResDto(todo);
+  }
+
+
   @Transactional
   public TodoResDto doneTodo(Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(() ->
