@@ -23,6 +23,7 @@ public class TodoServiceImpl implements TodoService {
 
   private final TodoRepository todoRepository;
 
+  @Override
   @Transactional
   public TodoResDto createTodo(CreateTodoReqDto dto) {
 
@@ -33,6 +34,7 @@ public class TodoServiceImpl implements TodoService {
     return new TodoResDto(newTodo);
   }
 
+  @Override
   public Page<Todo> getAllTodo(Pageable pageable) {
 
     return Optional.of(todoRepository.findAll(pageable)).orElseThrow();
@@ -46,6 +48,7 @@ public class TodoServiceImpl implements TodoService {
   }
 
 
+  @Override
   @Transactional
   public TodoResDto doneTodo(Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(() ->
