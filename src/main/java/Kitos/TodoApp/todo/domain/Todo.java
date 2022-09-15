@@ -11,6 +11,7 @@ import lombok.*;
 import javax.persistence.*;
 
 import static Kitos.TodoApp.global.exception.ErrorCode.ALREADY_DONE_TODO;
+import static Kitos.TodoApp.global.exception.ErrorCode.TODO_NOT_FOUND;
 
 @Builder
 @Getter
@@ -40,5 +41,11 @@ public class Todo extends BaseTimeEntity {
         if(this.isDone)
             throw new CustomException(ALREADY_DONE_TODO);
         this.isDone = true;
+    }
+
+    public void disabledTodo(){
+        if(!this.isActive)
+            throw new CustomException(TODO_NOT_FOUND);
+        this.isActive = false;
     }
 }

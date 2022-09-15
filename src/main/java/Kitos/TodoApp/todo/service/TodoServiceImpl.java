@@ -57,4 +57,13 @@ public class TodoServiceImpl implements TodoService {
     todo.doneTodo();
     return new TodoResDto(todo);
   }
+
+  @Override
+  @Transactional
+  public void deleteTodo(Long id) {
+    Todo todo = todoRepository.findById(id).orElseThrow(() ->
+            new CustomException(TODO_NOT_FOUND)
+    );
+    todo.disabledTodo();
+  }
 }
