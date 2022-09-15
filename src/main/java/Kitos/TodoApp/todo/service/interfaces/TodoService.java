@@ -18,4 +18,7 @@ public interface TodoService {
   TodoResDto getDetailTodo(Long id);
 
   TodoResDto doneTodo(Long id);
+
+  void deleteTodo(Long id);
+
 }
