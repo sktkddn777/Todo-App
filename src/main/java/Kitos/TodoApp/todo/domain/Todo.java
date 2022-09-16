@@ -38,6 +38,8 @@ public class Todo extends BaseTimeEntity {
     private boolean isActive;
 
     public void doneTodo() {
+        if(!this.isActive)
+            throw new CustomException(TODO_NOT_FOUND);
         if(this.isDone)
             throw new CustomException(ALREADY_DONE_TODO);
         this.isDone = true;
