@@ -35,7 +35,7 @@ class TodoServiceDoneTodoTest {
     @Autowired
     private TodoRepository todoRepository;
 
-    // TODO : 엔티티 로직 테스트도 서비스에서 하는게 맞는지?
+    // TODO : 수정필요
     @Test
     public void id에_해당하는_Todo가_없다면_NotFoundException_발생(){
         // given
