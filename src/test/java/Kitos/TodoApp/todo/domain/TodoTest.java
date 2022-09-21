@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static Kitos.TodoApp.global.exception.ErrorCode.ALREADY_DONE_TODO;
+import static Kitos.TodoApp.global.exception.ErrorCode.TODO_NOT_FOUND;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +44,36 @@ public class TodoTest {
 
         //then
         assertThat(e.getErrorCode()).isEqualTo(ALREADY_DONE_TODO);
+    }
+
+    @Test
+    public void Todo_비활성_처리(){
+        //given
+        Todo todo = Todo.builder()
+                .isActive(true)
+                .content("테스트")
+                .build();
+
+        //when
+        todo.disabledTodo();
+
+        //then
+        assertThat(todo.isActive()).isEqualTo(false);
+    }
+
+    @Test
+    public void 이미_비활성화된_Todo라면_예외발생(){
+        //given
+        Todo todo = Todo.builder()
+                .isActive(false)
+                .content("테스트")
+                .build();
+
+        //when
+        CustomException e = assertThrows(CustomException.class, () -> todo.disabledTodo());
+
+        //then
+        assertThat(e.getErrorCode()).isEqualTo(TODO_NOT_FOUND);
     }
 }
 
