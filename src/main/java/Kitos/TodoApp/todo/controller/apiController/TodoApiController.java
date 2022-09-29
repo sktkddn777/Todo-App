@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
@@ -21,8 +23,8 @@ public class TodoApiController {
 
   private final TodoService todoService;
 
-  @PostMapping // TODO: 유효성검사, 인가
-  public ResponseEntity<TodoResDto> createTodo(@RequestBody CreateTodoReqDto dto) {
+  @PostMapping // TODO: 인가
+  public ResponseEntity<TodoResDto> createTodo(@RequestBody @Valid CreateTodoReqDto dto) {
     TodoResDto todo = todoService.createTodo(dto);
 
     // new ResponseEntity(todo, HttpStatus.CREATED)도 가능
