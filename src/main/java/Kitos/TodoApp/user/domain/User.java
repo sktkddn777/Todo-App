@@ -3,7 +3,10 @@ package Kitos.TodoApp.user.domain;
 import Kitos.TodoApp.global.BaseTimeEntity;
 import Kitos.TodoApp.todo.domain.Todo;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +14,9 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseTimeEntity {
 
     @Id
