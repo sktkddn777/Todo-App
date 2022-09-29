@@ -15,7 +15,10 @@ public class ErrorResponse {
     private final String code;
     private final String message;
 
-    public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode) {
+    public static ResponseEntity<Object> toResponseEntity(CustomException e) {
+
+        ErrorCode errorCode = e.getErrorCode();
+
         return ResponseEntity
                 .status(errorCode.getHttpStatus())
                 .body(ErrorResponse.builder()
