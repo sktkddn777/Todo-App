@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public UserResDto create(SignUpDto dto) {
+        //TODO: 비밀번호, 비밀번호 확인 일치하는지 로직
         User user = SignUpDto.toEntity(dto);
 
         Optional<User> foundUserByName = userRepository.findByName(user.getName());
