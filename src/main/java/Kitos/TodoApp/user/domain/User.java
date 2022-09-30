@@ -28,11 +28,16 @@ public class User extends BaseTimeEntity {
     @Column(length = 20)
     private String name;
 
-    @NotNull
-    private String providerType; //TODO: Enum
+    private String email;
+
+    private String password;
 
     @NotNull
-    @Column(unique = true)
+    @Enumerated(EnumType.STRING) // enum 이름을 DB에 저장
+    private Provider providerType;
+
+    @NotNull
+    //@Column(unique = true)
     private String providerId;
 
     @OneToMany(mappedBy = "user")
