@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CreateTodoReqDto {
 
-  @NotBlank(message = "빈 값이 들어가면 안됩니다")
+  @NotBlank
   private String content;
 
   public static Todo toEntity(CreateTodoReqDto dto){

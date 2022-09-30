@@ -1,29 +1,31 @@
 package Kitos.TodoApp.todo.controller.apiController;
 
+import Kitos.TodoApp.global.exception.CustomException;
 import Kitos.TodoApp.todo.dto.request.CreateTodoReqDto;
 import Kitos.TodoApp.todo.service.interfaces.TodoService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @MockBean(JpaMetamodelMappingContext.class)
 @WebMvcTest(TodoApiController.class)
 class TodoApiControllerTest {
 
     @Autowired
-    private Validator validator;
+    MockMvc mvc;
 
     @MockBean
     private TodoService todoService;
@@ -32,20 +34,15 @@ class TodoApiControllerTest {
     @DisplayName("Create TODO 유효성 검사")
     void CreateTodoException() throws Exception {
         //given
-        CreateTodoReqDto dto = new CreateTodoReqDto("");
-        String errorMessage = "빈 값이 들어가면 안됩니다";
-
+        String emptyContent = "{\"content\":\"\"}";
         // when
-        Set<ConstraintViolation<CreateTodoReqDto>> violations = validator.validate(dto);
-
-        Iterator<ConstraintViolation<CreateTodoReqDto>> iterator = violations.iterator();
-        List<String> messages = new ArrayList<>();
-        while (iterator.hasNext()) {
-            ConstraintViolation<CreateTodoReqDto> next = iterator.next();
-            messages.add(next.getMessage());
-        }
-
+        MockHttpServletRequestBuilder request = post("/api/todos")
+                .accept(MediaType.APPLICATION_JSON)
+                .content(emptyContent)
+                .contentType(MediaType.APPLICATION_JSON);
         // then
-        Assertions.assertThat(messages).contains(errorMessage);
+        mvc.perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException));
     }
 }
